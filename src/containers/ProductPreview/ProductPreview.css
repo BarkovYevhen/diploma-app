@@ -1,0 +1,39 @@
+
+.productPreview-container {
+    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #44b26f;
+}
+
+.productPreview-header {
+  margin-bottom: 20px;
+}
+
+.productPreview-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  width: 100%; 
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.card-content button {
+  white-space: nowrap;
+}
+
+.logo {
+  width: 240px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+

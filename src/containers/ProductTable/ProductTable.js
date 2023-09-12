@@ -9,6 +9,7 @@ import RozetkaLogoWhite from "../../assets/RozetkaLogoWhite.svg";
 import PreviewIcon from "../../assets/PreviewIcon.svg";
 import PlusIcon from "../../assets/PlusIcon.svg";
 import { BsPencilFill, BsFillTrashFill } from "react-icons/bs";
+import API_URL from '../../constants/url';
 import axios from "axios"; 
 import "./ProductTable.css";
 
@@ -17,7 +18,7 @@ function ProductTable() {
 
   useEffect(() => {
     axios
-      .get("https://64f8ee62824680fd21803560.mockapi.io/Product")
+      .get(`${API_URL}/Product`)
       .then((response) => {
         setProducts(response.data);
       })
