@@ -1,17 +1,23 @@
-// src/components/ProductTable/ProductTable.js
-
 import React, { useState, useEffect } from "react";
 import {
-  Container, Typography, Table, TableContainer, TableHead,
-  TableRow, TableCell, TableBody, Paper,
+  Container,
+  Typography,
+  Table,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Paper,
 } from "@mui/material";
 import RozetkaLogoWhite from "../../assets/RozetkaLogoWhite.svg";
 import PreviewIcon from "../../assets/PreviewIcon.svg";
 import PlusIcon from "../../assets/PlusIcon.svg";
 import { BsPencilFill, BsFillTrashFill } from "react-icons/bs";
-import API_URL from '../../constants/url';
-import axios from "axios"; 
+import API_URL from "../../constants/url";
+import axios from "axios";
 import "./ProductTable.css";
+import { Link } from "react-router-dom";
 
 function ProductTable() {
   const [products, setProducts] = useState([]);
@@ -38,10 +44,12 @@ function ProductTable() {
       </div>
       <div className="buttons-container">
         <button className="productTable-button">
-          <div className="button-content">
-            <img src={PreviewIcon} alt="Body" className="button-icon"></img>
-            Preview
-          </div>
+          <Link to="/product-preview" className="productTable-button">
+            <div className="button-content">
+              <img src={PreviewIcon} alt="Body" className="button-icon"></img>
+              Preview
+            </div>
+          </Link>
         </button>
 
         <button className="productTable-button">
@@ -82,7 +90,9 @@ function ProductTable() {
                 <TableCell>{item.quantity}</TableCell>
                 <TableCell>{item.price}</TableCell>
                 <TableCell>
-                  <BsPencilFill style={{ marginRight: "8px", cursor: "pointer" }}/>
+                  <BsPencilFill
+                    style={{ marginRight: "8px", cursor: "pointer" }}
+                  />
                   <BsFillTrashFill style={{ cursor: "pointer" }} />
                 </TableCell>
               </TableRow>

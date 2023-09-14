@@ -8,8 +8,11 @@ import {
 } from "@mui/material";
 import { BsCart4 } from "react-icons/bs";
 import "./ProductCard.css";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+
   return (
     <Card className="card">
       <CardMedia
@@ -33,9 +36,13 @@ const ProductCard = ({ product }) => {
         </div>
         <Button
           variant="contained"
+          onClick={() => navigate(`/product/${product.id}`)}
+          fullWidth
+          className="productCard-button"
           startIcon={<BsCart4 />}
           style={{ marginTop: "20px" }}
-        >Готовий до відправки
+        >
+          Готовий до відправки
         </Button>
       </CardContent>
     </Card>
