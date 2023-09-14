@@ -1,17 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
-import Login from './containers/Login/Login';
-import ProductTable from './containers/ProductTable/ProductTable';
-import ProductPreview from './containers/ProductPreview/ProductPreview';
+// src/App.js
+import React from "react";
+import RoutesComponent from "./Routes";
 
 function App() {
   return (
     <div className="App">
-
-      {/* <Login /> */}
-      <ProductPreview />
-      {/* <ProductTable /> */}
-
+      <RoutesComponent />
     </div>
   );
 }
