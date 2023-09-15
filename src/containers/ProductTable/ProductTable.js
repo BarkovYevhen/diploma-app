@@ -18,9 +18,12 @@ import API_URL from "../../constants/url";
 import axios from "axios";
 import "./ProductTable.css";
 import { Link } from "react-router-dom";
+import DeleteModal from "../../components/DeleteModal";
 
 function ProductTable() {
   const [products, setProducts] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   useEffect(() => {
     axios
@@ -32,6 +35,31 @@ function ProductTable() {
         console.error("Error fetching data:", error);
       });
   }, []);
+
+  const handleDeleteClick = (productId) => {
+    setSelectedProductId(productId);
+    setShowDeleteModal(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setSelectedProductId(null);
+  };
+
+  const handleDeleteConfirm = async () => {
+    try {
+      await axios.delete(`${API_URL}/Product/${selectedProductId}`);
+      const updatedProducts = products.filter(
+        (product) => product.id !== selectedProductId
+      );
+      setProducts(updatedProducts);
+
+      setShowDeleteModal(false);
+      setSelectedProductId(null);
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
 
   return (
     <Container maxWidth="100%" className="productTable-container">
@@ -93,13 +121,21 @@ function ProductTable() {
                   <BsPencilFill
                     style={{ marginRight: "8px", cursor: "pointer" }}
                   />
-                  <BsFillTrashFill style={{ cursor: "pointer" }} />
+                  <BsFillTrashFill
+                    style={{ cursor: "pointer" }}
+                    onClick={() => handleDeleteClick(item.id)}
+                  />
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      <DeleteModal
+        open={showDeleteModal}
+        onClose={handleCloseDeleteModal}
+        onDelete={handleDeleteConfirm}
+      />
     </Container>
   );
 }
