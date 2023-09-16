@@ -19,11 +19,19 @@ import axios from "axios";
 import "./ProductTable.css";
 import { Link } from "react-router-dom";
 import DeleteModal from "../../components/DeleteModal";
+import EditModal from "../../components/EditModal";
 
 function ProductTable() {
   const [products, setProducts] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  const handleAddClick = () => {
+    setShowAddModal(true);
+  };
 
   useEffect(() => {
     axios
@@ -61,6 +69,18 @@ function ProductTable() {
     }
   };
 
+  const handleEditClick = (product) => {
+    setSelectedProduct(product);
+    setShowEditModal(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+    setSelectedProduct(null);
+  };
+
+  // тут логіка сабміту
+
   return (
     <Container maxWidth="100%" className="productTable-container">
       <div className="logo-container">
@@ -80,12 +100,30 @@ function ProductTable() {
           </Link>
         </button>
 
-        <button className="productTable-button">
+        <button
+          className="productTable-button"
+          onClick={() => {
+            setShowAddModal(true);
+          }}
+        >
           <div className="button-content">
             <img src={PlusIcon} alt="Plus" className="button-icon"></img> Add
             products
           </div>
         </button>
+        <EditModal
+          open={showAddModal}
+          onClose={() => setShowAddModal(false)}
+          // onSubmit={handleAddSubmit}
+          initialValues={{
+            category: "",
+            name: "",
+            quantity: "",
+            price: "",
+            description: "",
+          }}
+          isEdit={false}
+        />
       </div>
 
       <Typography
@@ -120,6 +158,7 @@ function ProductTable() {
                 <TableCell>
                   <BsPencilFill
                     style={{ marginRight: "8px", cursor: "pointer" }}
+                    onClick={() => handleEditClick(item)}
                   />
                   <BsFillTrashFill
                     style={{ cursor: "pointer" }}
@@ -135,6 +174,13 @@ function ProductTable() {
         open={showDeleteModal}
         onClose={handleCloseDeleteModal}
         onDelete={handleDeleteConfirm}
+      />
+      <EditModal
+        open={showEditModal}
+        onClose={handleCloseEditModal}
+        // onSubmit={handleEditSubmit}
+        initialValues={selectedProduct}
+        isEdit={true}
       />
     </Container>
   );
