@@ -27,19 +27,19 @@
 .edit-modal-button-cancel {
   background-color: #726969;
   color: #ffffff;
-  padding: 10px 20px;
+  padding: 6px 20px;
   border: none;
   border-radius: 4px;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .edit-modal-button-submit {
   background-color: #44b26f;
   color: #ffffff;
-  padding: 10px 20px;
+  padding: 6px 20px;
   border: none;
   border-radius: 4px;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .edit-modal-button-cancel:hover,
