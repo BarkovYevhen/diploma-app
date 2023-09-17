@@ -1,4 +1,4 @@
-// src/App.js
+
 import React from "react";
 import RoutesComponent from "./Routes";
 

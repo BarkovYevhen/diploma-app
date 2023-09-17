@@ -22,45 +22,47 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-
   const sendLoginRequest = async (username, password) => {
-    try {
-      const response = await axios.post("http://localhost:5000/api/login", {
-        username,
-        password,
-      });
-      const token = response.data.token;
-      localStorage.setItem("token", token);
-      console.log("JWT Token:", token);
-      setErrorMessage(""); 
-    } catch (error) {
-      console.error("Error logging in:", error);
-      setErrorMessage("Логін або пароль не вірні");
+  try {
+    if (username.trim() === "" || password.trim() === "") {
+      setErrorMessage("Заповніть поля 'User Name' та 'Password'");
+      return;
     }
-  };
 
+    const response = await axios.post("http://localhost:5000/api/login", {
+      username,
+      password,
+    });
+    const token = response.data.token;
+    localStorage.setItem("token", token);
+    console.log("JWT Token:", token);
+    setErrorMessage(""); 
+  } catch (error) {
+    console.error("Error logging in:", error);
+    setErrorMessage("Логін або пароль не вірні");
+  }
+};
 
-  const handleInputBlur = (field, setFieldMeta) => {
-    setFieldMeta({ touched: true, error: field.trim() === "" });
-  };
+const handleInputBlur = (field, setFieldMeta) => {
+  setFieldMeta({ touched: true, error: field.trim() === "" });
+};
 
-  const handleLogin = () => {
-    handleInputBlur(userName, setUserNameMeta);
-    handleInputBlur(password, setPasswordMeta);
+const handleLogin = () => {
+  handleInputBlur(userName, setUserNameMeta);
+  handleInputBlur(password, setPasswordMeta);
 
-    if (!userNameMeta.error && !passwordMeta.error) {
-      sendLoginRequest(userName, password);
-    }
+  if (!userNameMeta.error && !passwordMeta.error) {
+    sendLoginRequest(userName, password);
+  }
 
     localStorage.setItem("token", "your-jwt-token");
-    navigate("/");
+    navigate("/product-table");
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
     setEyeIcon(showPassword ? <AiFillEye /> : <AiFillEyeInvisible />);
   };
-
   return (
     <Container
       maxWidth="100%"

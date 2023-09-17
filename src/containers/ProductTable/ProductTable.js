@@ -1,16 +1,21 @@
-// src/components/ProductTable/ProductTable.js
-
 import React, { useState, useEffect } from "react";
 import {
-  Container, Typography, Table, TableContainer, TableHead,
-  TableRow, TableCell, TableBody, Paper,
+  Container,
+  Typography,
+  Table,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Paper,
 } from "@mui/material";
 import RozetkaLogoWhite from "../../assets/RozetkaLogoWhite.svg";
 import PreviewIcon from "../../assets/PreviewIcon.svg";
 import PlusIcon from "../../assets/PlusIcon.svg";
 import { BsPencilFill, BsFillTrashFill } from "react-icons/bs";
-import API_URL from '../../constants/url';
-import axios from "axios"; 
+import API_URL from "../../constants/url";
+import axios from "axios";
 import "./ProductTable.css";
 import { Link } from "react-router-dom";
 
