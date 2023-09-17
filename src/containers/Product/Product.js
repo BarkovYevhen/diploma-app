@@ -46,7 +46,10 @@ const Product = () => {
             {" "}
             {<BiArrowBack style={{ fontSize: "35px" }} />}{" "}
           </Link>
-          <h1 className="product-navigate-header">{product.name}</h1>
+          <h1 className="product-navigate-header">
+            {product.category} {" "}
+             {product.name}
+          </h1>
         </div>
         <div className="product-content">
           <div className="product-avatar">
@@ -60,7 +63,10 @@ const Product = () => {
         </div>
         <div className="product-description">
           <h2>
-            Опис <span className="description-head">{product.name}</span>
+            Опис{" "}
+            <span className="description-head">
+              {product.category} {product.name}
+            </span>
           </h2>
           {product.description.split("\n").map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
