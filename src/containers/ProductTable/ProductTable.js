@@ -79,7 +79,20 @@ function ProductTable() {
     setSelectedProduct(null);
   };
 
-  // тут логіка сабміту
+  const handleEditSubmit = async (values) => {
+    try {
+      await axios.put(`${API_URL}/Product/${selectedProduct.id}`, values);
+      const updatedProducts = products.map((product) =>
+        product.id === selectedProduct.id ? { ...product, ...values } : product
+      );
+      setProducts(updatedProducts);
+
+      setShowEditModal(false);
+      setSelectedProduct(null);
+    } catch (error) {
+      console.error("Error editing product:", error);
+    }
+  };
 
   const handleAddSubmit = async (values) => {
     try {
@@ -190,7 +203,7 @@ function ProductTable() {
       <EditModal
         open={showEditModal}
         onClose={handleCloseEditModal}
-        // onSubmit={handleEditSubmit}
+        onSubmit={handleEditSubmit}
         initialValues={selectedProduct}
         isEdit={true}
       />
