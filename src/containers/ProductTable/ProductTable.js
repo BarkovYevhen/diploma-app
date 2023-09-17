@@ -81,6 +81,18 @@ function ProductTable() {
 
   // тут логіка сабміту
 
+  const handleAddSubmit = async (values) => {
+    try {
+      await axios.post(`${API_URL}/Product`, values);
+      const response = await axios.get(`${API_URL}/Product`);
+      setProducts(response.data);
+
+      setShowAddModal(false);
+    } catch (error) {
+      console.error("Error adding product:", error);
+    }
+  };
+
   return (
     <Container maxWidth="100%" className="productTable-container">
       <div className="logo-container">
@@ -114,7 +126,7 @@ function ProductTable() {
         <EditModal
           open={showAddModal}
           onClose={() => setShowAddModal(false)}
-          // onSubmit={handleAddSubmit}
+          onSubmit={handleAddSubmit}
           initialValues={{
             category: "",
             name: "",
