@@ -22,7 +22,6 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-
   const sendLoginRequest = async (username, password) => {
   try {
     if (username.trim() === "" || password.trim() === "") {

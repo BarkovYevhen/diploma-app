@@ -8,6 +8,7 @@ import {
 import Login from "./containers/Login/Login";
 import ProductTable from "./containers/ProductTable/ProductTable";
 import ProductPreview from "./containers/ProductPreview/ProductPreview";
+
 import Product from "./containers/Product/Product";
 
 const isAuthenticated = () => {
@@ -34,6 +35,7 @@ const RoutesComponent = () => {
         <Route
           path="/product/:id"
           element={<Product />} />
+
       </Routes>
     </Router>
   );
