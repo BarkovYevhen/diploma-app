@@ -79,7 +79,32 @@ function ProductTable() {
     setSelectedProduct(null);
   };
 
-  // тут логіка сабміту
+  const handleEditSubmit = async (values) => {
+    try {
+      await axios.put(`${API_URL}/Product/${selectedProduct.id}`, values);
+      const updatedProducts = products.map((product) =>
+        product.id === selectedProduct.id ? { ...product, ...values } : product
+      );
+      setProducts(updatedProducts);
+
+      setShowEditModal(false);
+      setSelectedProduct(null);
+    } catch (error) {
+      console.error("Error editing product:", error);
+    }
+  };
+
+  const handleAddSubmit = async (values) => {
+    try {
+      await axios.post(`${API_URL}/Product`, values);
+      const response = await axios.get(`${API_URL}/Product`);
+      setProducts(response.data);
+
+      setShowAddModal(false);
+    } catch (error) {
+      console.error("Error adding product:", error);
+    }
+  };
 
   return (
     <Container maxWidth="100%" className="productTable-container">
@@ -114,7 +139,7 @@ function ProductTable() {
         <EditModal
           open={showAddModal}
           onClose={() => setShowAddModal(false)}
-          // onSubmit={handleAddSubmit}
+          onSubmit={handleAddSubmit}
           initialValues={{
             category: "",
             name: "",
@@ -178,7 +203,7 @@ function ProductTable() {
       <EditModal
         open={showEditModal}
         onClose={handleCloseEditModal}
-        // onSubmit={handleEditSubmit}
+        onSubmit={handleEditSubmit}
         initialValues={selectedProduct}
         isEdit={true}
       />
