@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button, Container } from "@mui/material";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import RozetkaLogo from '../../assets/RozetkaLogo.svg';
-import "../../containers/Login/Login.css";
+import "./Login.css";
 
 function Login() {
   const [userName, setUserName] = useState("");
